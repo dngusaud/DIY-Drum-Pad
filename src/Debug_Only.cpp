@@ -2,8 +2,8 @@
 #include "Debug_Only.h"
 
 
-Debug_Only::Debug_Only(int zero){
-    Serial.begin(115200); //Serial monitoring enabled, recommended to use Arudino Serial Monitor since VSC one is bit laggy
+Debug_Only::Debug_Only(int baudrate){
+    Serial.begin(baudrate); //Serial monitoring enabled, recommended to use Arudino Serial Monitor since VSC one is bit laggy
     Serial.println("Debugging Starting");
 }
 

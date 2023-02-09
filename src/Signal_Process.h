@@ -19,18 +19,15 @@ class Signal_Process{
     //Process_Signal Constructor setups the input pinout, input threshold and velocity steps threshold  
     Signal_Process(int input_pin, int input_threshold, int velocity_threshold);
 
-    //Outputs the maximum velocity measured
-    int Get_Max_Velocity();
 
-    //Enable the Signal processing only once, so needs to be called every time in Main Loop()
-    void Enable_Signal_Processing();
-
-    //True if there is any velocity measured
-    bool Signal_Present();
+    int Peak_Detector();  //Return the peak value of the input signal
 
     //Threshold value setter
     void Set_Input_Threshold(int input_threshold);
     void Set_Velocity_Threshold(int velocity_threshold);
+
+
+
     
 
 
@@ -43,9 +40,7 @@ class Signal_Process{
     int velocity_positive_threshold; //Rising Edge Threshold 
     int velocity_negative_threshold;  //Falling Edge Threshold
 
-    //Signal Processing Variables
-    int val = 0;  //Analog Signal from the Piezo sensor
-    int velocity = 0; //Processing variable of the signal processing  
+    int velocity = 0;
     int max_velocity = 0; //Final output variable of the signal processing
     int prev_velocity = 0; 
 
@@ -53,17 +48,6 @@ class Signal_Process{
     bool sig_process_enabled = false; //This will be true if the sig triggers over the positive threshold 
     bool max_sig_extracted = false; //This will be true only once if Signal_Processing extracted the maximum signal value.
 
-    //Constantly reading the value
-    int Read_Input_Signal(int pin_num);
-
-    //Monitor if the reading signal is greater than the threshold value, virtual schmitt trigger is applied
-    void Monitor_Input_Signal(int value);
-
-    // Extract the maximum velocity
-    void Extract_Max_Velocity(int value);
-
-    //Reset the maximum velocity to 0
-    void Reset_Max_Velocity();
 
 };
 

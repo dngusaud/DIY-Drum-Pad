@@ -1,9 +1,4 @@
-#include <Arduino.h>
-#include <Signal_Process.h>
-#include <Debug_Only.h>
-
-/*
-  DIY DRUM PAD 
+/* DIY DRUM PAD 
 
   Using the Piezo sensor inputs the knocking signal and outputs processed sound signaㅣ.
 
@@ -12,11 +7,13 @@
   Author: Andy Woo
 */
 
-
+#include <Arduino.h>
+#include <Signal_Process.h>
+#include <Debug_Only.h>
 #include "Cowbell1.h"  //Test Sample
 
-
-
+#pragma region Teensy Audio Shield
+// https://www.pjrc.com/teensy/gui/
 //Copied all from the below
 #include <Audio.h>
 #include <Wire.h>
@@ -24,7 +21,6 @@
 #include <SD.h>
 #include <SerialFlash.h>
 
-// GUItool: begin automatically generated code
 AudioPlayMemory          playMem1;       //xy=215,209.00000381469727
 AudioPlayMemory          playMem2; //xy=216.00000381469727,290.00000381469727
 AudioMixer4              mixer2; //xy=475.00000762939453,300.00000381469727
@@ -37,24 +33,23 @@ AudioConnection          patchCord3(mixer2, 0, mixer3, 1);
 AudioConnection          patchCord4(mixer1, 0, mixer3, 0);
 AudioConnection          patchCord5(mixer3, 0, i2s1, 0);
 AudioConnection          patchCord6(mixer3, 0, i2s1, 1);
-// GUItool: end automatically generated code
 
 // Copied all from above
 
 // Create an object to control the audio shield.
 AudioControlSGTL5000 audioShield;
 
+#pragma endregion
+
 float velocity = 0.0;
 
-
-Debug_Only scope(0);
+Debug_Only scope(115200);
 Signal_Process PAD0(A0, 20,20); 
 
 
 void setup() {
   AudioMemory(10);
-
-
+  
   // turn on the output
   audioShield.enable();
   audioShield.volume(0.5);
@@ -66,6 +61,7 @@ void setup() {
 }
 
 void loop() {
+  /*
   PAD0.Enable_Signal_Processing();
   
   if(PAD0.Signal_Present()){
@@ -84,6 +80,11 @@ void loop() {
     }
     scope.test_Print("Velocity : ", velocity);
   }
+  */
+
+ scope.test_Print("Veloctiy", PAD0.Peak_Detector());
+
+
 }
 
 
