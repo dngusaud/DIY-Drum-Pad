@@ -1,0 +1,57 @@
+(kicad_sch
+	(version 20231120)
+	(generator "eeschema")
+	(generator_version "8.0")
+	(uuid "fa7dc156-0738-4812-9e62-07e618374ad9")
+	(paper "A5")
+	(title_block
+		(title "Drum Pad")
+		(date "2024-10-28")
+		(rev "1")
+	)
+	(lib_symbols)
+	(sheet
+		(at 25.4 25.4)
+		(size 29.21 17.78)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+			(color 184 184 184 1)
+		)
+		(fill
+			(color 255 255 255 1.0000)
+		)
+		(uuid "4277ded8-b5b3-4b4d-a9ae-16de9562f325")
+		(property "Sheetname" "Piezo Processing Board"
+			(at 25.4 24.6884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Piezo_Processing_Board.kicad_sch"
+			(at 25.4 43.7646 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "DrumPADPCB"
+				(path "/fa7dc156-0738-4812-9e62-07e618374ad9"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+)

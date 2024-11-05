@@ -19,16 +19,11 @@ class Signal_Process{
     //Process_Signal Constructor setups the input pinout, input threshold and velocity steps threshold  
     Signal_Process(int input_pin, int input_threshold, int velocity_threshold);
 
-
     int Peak_Detector();  //Return the peak value of the input signal
 
     //Threshold value setter
     void Set_Input_Threshold(int input_threshold);
     void Set_Velocity_Threshold(int velocity_threshold);
-
-
-
-    
 
 
   private:
@@ -42,11 +37,13 @@ class Signal_Process{
 
     int velocity = 0;
     int max_velocity = 0; //Final output variable of the signal processing
-    int prev_velocity = 0; 
+    int prev_max_velocity = 0; 
+    int last_raw_value = 0;
+    int t = 0;
 
     //Signal Processing Conditional Variables
     bool sig_process_enabled = false; //This will be true if the sig triggers over the positive threshold 
-    bool max_sig_extracted = false; //This will be true only once if Signal_Processing extracted the maximum signal value.
+    bool peak_detected = false;//This will be true only once if Signal_Processing extracted the maximum signal value.
 
 
 };

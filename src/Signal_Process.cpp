@@ -25,26 +25,30 @@ int Signal_Process::Peak_Detector(){
 
     int raw_value = analogRead(analog_input_pin);
 
-    if(raw_value < input_negaitve_threshold){   //Signal below negative Threshold, Ignore and return
-        sig_process_enabled = false;
-        velocity = 0;
-        max_velocity = 0;
-        return 0;
-    }
+    // if(raw_value < input_negaitve_threshold){   //Signal below negative Threshold, Ignore and return
+    //     sig_process_enabled = false;
+    //     velocity = 0;
+    //     max_velocity = 0;
+    //     prev_max_velocity = 0;
+    //     peak_detected = false;
+    // }
 
-    if (raw_value > input_positive_threshold){  //Signal detected, proceed next
-        sig_process_enabled = true;
-    }
+    // if (raw_value > input_positive_threshold){  //Signal detected, proceed next
+    //     sig_process_enabled = true;
+    //     peak_detected = false;
+        
+    // }
 
-    if(raw_value > velocity + velocity_positive_threshold){  //Peak not yet detected, return
-        velocity = raw_value;
-        return 0;
-    }
+    // if(raw_value > velocity + velocity_positive_threshold){  //Peak not yet detected, return
+    //     velocity = raw_value;
+    //     peak_detected = false;
+    // }
 
-    if(raw_value < velocity - velocity_negative_threshold){ //Peak detected, return max velocity
-        max_velocity = velocity + velocity_negative_threshold;  
-        return max_velocity;
-    } 
+    // if(raw_value < velocity - velocity_negative_threshold){ //Peak detected, return max velocity
+    //     max_velocity = velocity;  
+    // } 
+
+
 
 }
 
