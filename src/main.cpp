@@ -45,22 +45,24 @@ AudioControlSGTL5000 audioShield;
 
 #pragma endregion
 
-float velocity = 0.0;
-float max_velocity = 0.0;
+Debug_Only scope(9600);
+Signal_Process PAD0(A0, 20,15); 
 
-int adc_t = 10; //arbitrary ADC sample time in us(?)
-int val = 0;
-int val_pre = 0;
-int slope = 0;
 
-bool peak_detected = false;
+int analog_input_pin;          //Input pin number
+int input_hysteresis = 5;             //Difference between positive threshold and negtiave threshold
+int velocity_hysteresis = 5;             //Difference between positive threshold and negtiave threshold
+int input_pos_thres;  //Rising Edge Threshold 
+int input_neg_thres;  //Falling Edge Threshold 
+int vel_pos_thres; //Rising Edge Threshold 
+int vel_neg_thres;  //Falling Edge Threshold
+int raw;
 
-uint8_t peak_detect_state = 0; // 0:stand by, 1: detection loaded 2: peak detected. 
 
-Debug_Only scope(115200);
-Signal_Process PAD0(A0, 20,20); 
+int max_velocity = 0; //Final output variable of the signal processing
 
-int peakVal = 0;
+//Signal Processing Conditional Variables
+bool peak_detected = 0; // 0: stand by expecting peak, 1: peak detected
 
 void setup() {
   AudioMemory(10);
@@ -97,27 +99,7 @@ void loop() {
   //   }
   //   scope.test_Print("Velocity : ", velocity);
   // }
-  val = analogRead(A0);
-  
-  if (val > 10){  //digital filter to ignore noise.
-    if((val > max_velocity + 10) && ((peak_detect_state == 0) or (peak_detect_state == 1))){
-      max_velocity = val;
-      peak_detect_state = 1;  //detection is loaded
-    }
-    else if((val < max_velocity - 15) && (peak_detect_state == 1))
-    {
-      scope.test_Print("Peak: ", val);
-      peak_detect_state = 2;
-    }
-    else if((val > max_velocity + 10 ) && (peak_detect_state == 2)){
-      peak_detect_state = 1;  //continuation detected. 
-      max_velocity = 0;
-    }
-  }
-  else{ //Reset
-    max_velocity = 0;
-    peak_detect_state = 0;
-  }
+  int val = PAD0.Peak_Detector();
 }
 
 
