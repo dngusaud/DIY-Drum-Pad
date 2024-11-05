@@ -55,6 +55,8 @@ int slope = 0;
 
 bool peak_detected = false;
 
+uint8_t peak_detect_state = 0; // 0:stand by, 1: detection loaded 2: peak detected. 
+
 Debug_Only scope(115200);
 Signal_Process PAD0(A0, 20,20); 
 
@@ -97,23 +99,25 @@ void loop() {
   // }
   val = analogRead(A0);
   
-  if (val > 50){
-    if(val > max_velocity + 10){
+  if (val > 10){  //digital filter to ignore noise.
+    if((val > max_velocity + 10) && ((peak_detect_state == 0) or (peak_detect_state == 1))){
       max_velocity = val;
-      peak_detected = false;
+      peak_detect_state = 1;  //detection is loaded
     }
-    else if((val < max_velocity - 20) && (peak_detected == false))
+    else if((val < max_velocity - 15) && (peak_detect_state == 1))
     {
       scope.test_Print("Peak: ", val);
-      peak_detected = true;
+      peak_detect_state = 2;
+    }
+    else if((val > max_velocity + 10 ) && (peak_detect_state == 2)){
+      peak_detect_state = 1;  //continuation detected. 
+      max_velocity = 0;
     }
   }
   else{ //Reset
     max_velocity = 0;
-    peak_detected = false;
+    peak_detect_state = 0;
   }
-
-
 }
 
 
