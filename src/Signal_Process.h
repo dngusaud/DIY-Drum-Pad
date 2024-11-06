@@ -36,12 +36,14 @@ class Signal_Process{
     int vel_pos_thres; //Rising Edge Threshold 
     int vel_neg_thres;  //Falling Edge Threshold
     int raw = 0;
-    int prev_raw = 0;
+    int prev_filtered_val = 0;
+
+    int filtered_val = 0;
 
     int max_velocity = 0; //Final output variable of the signal processing
 
     //Signal Processing Conditional Variables
-    bool peak_detected = 0; // 0: stand by expecting peak, 1: peak detected
+    uint8_t detection_state = 0; // 0: stand by expecting peak, 1: peak detected
     bool processing = false;
 };
 

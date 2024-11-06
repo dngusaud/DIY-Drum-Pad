@@ -21,37 +21,22 @@ void Signal_Process::Set_Velocity_Threshold(int velocity_threshold, int hysteres
 
 int Signal_Process::Peak_Detector(){
 
-
     raw = analogRead(analog_input_pin);
 
-    if(raw > 20){
-        if(!processing){
-            processing = true;
-            Serial.println("---------------------START--------------------");
-        }
-        Serial.println("RAW: " + String(raw) + "    State: " + String(peak_detected) + "    Peak: " + String(max_velocity) );
-        if((raw > max_velocity + 20) && (peak_detected == 0)){
-            max_velocity = raw;
-            peak_detected = 0;
-        }
-        
-        if((raw < max_velocity - 35) && (peak_detected == 0)){
-            peak_detected = 1;
-            Serial.print("--------------------------------------------------------------");
-        }
+    if ((raw > filtered_val + 10) or (raw  < filtered_val - 10)){   //filter the signal with step of 10;
+        filtered_val = raw;
+    }
 
-        if((raw > prev_raw + 10) && (peak_detected == 1)){
-            max_velocity = 0;
-            peak_detected = 0;
-        }
+    if(filtered_val > 20 && prev_filtered_val != filtered_val){
+        Serial.println(filtered_val);
     }
     else if(raw < 5){
         max_velocity = 0;
-        peak_detected = 0;
-        raw = 0;
+        detection_state = 0;
+        filtered_val = 0;
         processing = false;
     }
-    prev_raw = raw;
+    prev_filtered_val = filtered_val;
     return 0;
 }
 
