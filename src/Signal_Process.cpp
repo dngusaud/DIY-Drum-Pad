@@ -21,28 +21,32 @@ void Signal_Process::Set_Velocity_Threshold(int velocity_threshold, int hysteres
 
 int Signal_Process::Peak_Detector(){
 
+    int thres = 15;
+
     raw = analogRead(analog_input_pin);
 
-    if ((raw > filtered_val + 10) or (raw  < filtered_val - 10)){   //filter the signal with step of 10;
-        filtered_val = raw;
+    if(raw > 20){
+        if ((raw > filtered_val + thres) or (raw  < filtered_val - thres)){   //filter the signal with step of 10;
+            filtered_val = raw;
+            if((prev_slope > 0) && ((filtered_val - prev_filtered_val) < 0)){
+                max_velocity = filtered_val + thres;
+                Serial.println("Peak: " + String(max_velocity));
+            }
+            //Serial.println("Current Slope: " + String(filtered_val - prev_filtered_val) + "    prev Slope: " + String(prev_slope));
+            prev_slope = filtered_val - prev_filtered_val;
+            prev_filtered_val = filtered_val;
+        }
     }
-
-    if(filtered_val > 20 && prev_filtered_val != filtered_val){
-        Serial.println(filtered_val);
-    }
-    else if(raw < 5){
+    else if(raw < 10){
         max_velocity = 0;
         detection_state = 0;
         filtered_val = 0;
-        processing = false;
+        prev_filtered_val = 0;
+        prev_slope = 0;
+        processing = false;  
     }
-    prev_filtered_val = filtered_val;
     return 0;
 }
 
-
-// Current Bug, 1. It is not truely dynamically detecing input
-// Need to check if that dynamic is represented in the raw (priobably yes)
-// Peak detection reset error afer max = 0, immediately update peak, maybe okay since detection is not flaggeD?
-
+// Dynamic detection is achieved, now need a method to return this value, to only return value the peak values once. Not sequence of themm.....
 

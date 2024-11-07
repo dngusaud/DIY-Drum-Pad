@@ -100,8 +100,10 @@ void loop() {
   //   scope.test_Print("Velocity : ", velocity);
   // }
   int val = PAD0.Peak_Detector();
-}
+  
 
+}
+ 
 
 
 
