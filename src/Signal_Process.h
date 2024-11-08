@@ -22,30 +22,34 @@ class Signal_Process{
     int Peak_Detector();  //Return the peak value of the input signal
 
     //Threshold value setter
-    void Set_Input_Threshold(int input_threshold);
-    void Set_Velocity_Threshold(int velocity_threshold);
+    void Set_Input_Threshold(int input_threshold, int input_hysteresis);
+    void Set_Velocity_Threshold(int velocity_threshold, int velocity_hysteresis);
 
 
   private:
     //Signal Processing Contants
     int analog_input_pin;          //Input pin number
-    int schmitt_value = 5;             //Difference between positive threshold and negtiave threshold
-    int input_positive_threshold;  //Rising Edge Threshold 
-    int input_negaitve_threshold;  //Falling Edge Threshold 
-    int velocity_positive_threshold; //Rising Edge Threshold 
-    int velocity_negative_threshold;  //Falling Edge Threshold
+    int input_hysteresis = 5;             //Difference between positive threshold and negtiave threshold
+    int velocity_hysteresis = 5;             //Difference between positive threshold and negtiave threshold
+    int input_pos_thres;  //Rising Edge Threshold 
+    int input_neg_thres;  //Falling Edge Threshold 
+    int vel_pos_thres; //Rising Edge Threshold 
+    int vel_neg_thres;  //Falling Edge Threshold
 
-    int velocity = 0;
+
+    int raw = 0;
+    int prev_filtered_val = 0;
+    int prev_slope = 0; // Previous slope value.  
+    int prev_max_velocity = 0;
     int max_velocity = 0; //Final output variable of the signal processing
-    int prev_max_velocity = 0; 
-    int last_raw_value = 0;
-    int t = 0;
+    int output = 0;
+    int filtered_val = 0;
+
+
 
     //Signal Processing Conditional Variables
-    bool sig_process_enabled = false; //This will be true if the sig triggers over the positive threshold 
-    bool peak_detected = false;//This will be true only once if Signal_Processing extracted the maximum signal value.
-
-
+    uint8_t detection_state = 0; // 0: stand by expecting peak, 1: peak detected
+    bool processing = false;
 };
 
 

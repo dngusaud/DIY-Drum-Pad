@@ -45,20 +45,24 @@ AudioControlSGTL5000 audioShield;
 
 #pragma endregion
 
-float velocity = 0.0;
-float max_velocity = 0.0;
+Debug_Only scope(9600);
+Signal_Process PAD0(A0, 20,15); 
 
-int adc_t = 10; //arbitrary ADC sample time in us(?)
-int val = 0;
-int val_pre = 0;
-int slope = 0;
 
-bool peak_detected = false;
+int analog_input_pin;          //Input pin number
+int input_hysteresis = 5;             //Difference between positive threshold and negtiave threshold
+int velocity_hysteresis = 5;             //Difference between positive threshold and negtiave threshold
+int input_pos_thres;  //Rising Edge Threshold 
+int input_neg_thres;  //Falling Edge Threshold 
+int vel_pos_thres; //Rising Edge Threshold 
+int vel_neg_thres;  //Falling Edge Threshold
+int raw;
 
-Debug_Only scope(115200);
-Signal_Process PAD0(A0, 20,20); 
 
-int peakVal = 0;
+int max_velocity = 0; //Final output variable of the signal processing
+
+//Signal Processing Conditional Variables
+bool peak_detected = 0; // 0: stand by expecting peak, 1: peak detected
 
 void setup() {
   AudioMemory(10);
@@ -95,27 +99,14 @@ void loop() {
   //   }
   //   scope.test_Print("Velocity : ", velocity);
   // }
-  val = analogRead(A0);
+  int val = PAD0.Peak_Detector();
   
-  if (val > 50){
-    if(val > max_velocity + 10){
-      max_velocity = val;
-      peak_detected = false;
-    }
-    else if((val < max_velocity - 20) && (peak_detected == false))
-    {
-      scope.test_Print("Peak: ", val);
-      peak_detected = true;
-    }
+  if(val != 0){
+    Serial.println(val);
   }
-  else{ //Reset
-    max_velocity = 0;
-    peak_detected = false;
-  }
-
 
 }
-
+ 
 
 
 
