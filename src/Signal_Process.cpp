@@ -25,19 +25,24 @@ int Signal_Process::Peak_Detector(){
 
     raw = analogRead(analog_input_pin);
 
-    if(raw > 20){
+    if(raw > 20){   //Signal detected extract peak value
         if ((raw > filtered_val + thres) or (raw  < filtered_val - thres)){   //filter the signal with step of 10;
             filtered_val = raw;
-            if((prev_slope > 0) && ((filtered_val - prev_filtered_val) < 0)){
+            if((prev_slope > 0) && ((filtered_val - prev_filtered_val) < 0)){   //Slope change from positive to negative, meaning local peak has been reached
                 max_velocity = filtered_val + thres;
-                Serial.println("Peak: " + String(max_velocity));
+                //Serial.println("Peak: " + String(max_velocity));
             }
-            //Serial.println("Current Slope: " + String(filtered_val - prev_filtered_val) + "    prev Slope: " + String(prev_slope));
-            prev_slope = filtered_val - prev_filtered_val;
-            prev_filtered_val = filtered_val;
+            else{
+                max_velocity = 0;
+            }
+            prev_slope = filtered_val - prev_filtered_val;  // Save current slope to compare at next
+            prev_filtered_val = filtered_val;   // Save current value for filtering 
+        }
+        else{
+            max_velocity = 0;
         }
     }
-    else if(raw < 10){
+    else if(raw < 10){  // Signal below threshold, ignore as noise
         max_velocity = 0;
         detection_state = 0;
         filtered_val = 0;
@@ -45,8 +50,8 @@ int Signal_Process::Peak_Detector(){
         prev_slope = 0;
         processing = false;  
     }
-    return 0;
+    return max_velocity;
 }
 
-// Dynamic detection is achieved, now need a method to return this value, to only return value the peak values once. Not sequence of themm.....
+// Dynamic detection fully implemented, need to test with audio samples. 
 

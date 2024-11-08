@@ -101,6 +101,9 @@ void loop() {
   // }
   int val = PAD0.Peak_Detector();
   
+  if(val != 0){
+    Serial.println(val);
+  }
 
 }
  
