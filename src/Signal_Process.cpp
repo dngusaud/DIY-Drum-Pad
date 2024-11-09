@@ -2,10 +2,10 @@
 #include "Signal_Process.h"
 
 
-Signal_Process::Signal_Process(uint8_t input_pin, uint8_t input_deadband, uint8_t velocity_levels){
+Signal_Process::Signal_Process(uint8_t input_pin, uint8_t input_deadband, uint8_t velocity_deadband){
     analog_input_pin = input_pin; //Input pin number      
     Set_Input_Deadband(input_deadband);
-    Set_Velocity_Deadband(velocity_levels);
+    Set_Velocity_Deadband(velocity_deadband);
 }
 
 void Signal_Process::Set_Input_Deadband(uint8_t deadband){
@@ -21,7 +21,7 @@ int Signal_Process::Peak_Detector(){
     raw = analogRead(analog_input_pin);
 
     if(raw > input_deadband_thres){   //Signal detected extract peak value
-        if ((raw > filtered_val + velocity_thres) or (raw  < filtered_val - velocity_thres)){   //filter the signal with step of 10;
+        if ((raw > filtered_val + velocity_thres) or (raw  < filtered_val - velocity_thres)){   //Deadband filter threshold detection
             filtered_val = raw;
             if((prev_slope > 0) && ((filtered_val - prev_filtered_val) < 0)){   //Slope change from positive to negative, meaning local peak has been reached
                 max_velocity = filtered_val + velocity_thres;
@@ -42,7 +42,6 @@ int Signal_Process::Peak_Detector(){
         prev_filtered_val = 0;
         prev_slope = 0;
     }
+
     return max_velocity;
 }
-
-// Functions parameterised, need to test since not tested codes 

@@ -46,7 +46,7 @@ AudioControlSGTL5000 audioShield;
 #pragma endregion
 
 Debug_Only scope(9600);
-Signal_Process PAD0(A0,15, 100); 
+Signal_Process PAD0(A0,15, 10); 
 
 
 int analog_input_pin;          //Input pin number
@@ -77,36 +77,23 @@ void setup() {
   mixer2.gain(0, 0.7);
 
   Serial.print("Serial Begin");
+  pinMode(0,INPUT_PULLUP);
 }
 
 void loop() {
-  
-  // PAD0.Enable_Signal_Processing();
-
-  // if(PAD0.Signal_Present()){
-  //   velocity = float(PAD0.Get_Max_Velocity())/1500;
-  //   //By setting two playMem for one sample, it allows overlap, 
-  //   //otherwise, cracking or pop sound occur due to instant stop of sample
-  //   //The pop is still present in long samples eg ride, crash. so its Ideal to have more memory stanby.
-
-  //   if(playMem1.isPlaying()){ 
-  //     mixer2.gain(0,velocity);
-  //     playMem2.play(Cowbell1);
-  //   }
-  //   else{
-  //     mixer1.gain(0,velocity);
-  //     playMem1.play(Cowbell1);
-  //   }
-  //   scope.test_Print("Velocity : ", velocity);
-  // }
   int val = PAD0.Peak_Detector();
-  
-  if(val != 0){
-    Serial.println(val);
+
+  if(val > 0){
+    //By setting two playMem for one sample, it allows overlap, 
+    //otherwise, cracking or pop sound occur due to instant stop of sample
+    //The pop is still present in long samples eg ride, crash. so its Ideal to have more memory stanby.
+    float volume = ((float)val / 624);
+    mixer2.gain(0,volume);
+    playMem2.play(Cowbell1);
+
+    Serial.println("Peak: " + String(volume));
   }
-
 }
+ // Cowbell audio sampling tested. It sucessfully plays the cow bell sample sound with impact the piezo dynamically. No delay or skipping input detected. 
+ // Small issue as if multiple input received, sometime, often called "pop" sound detected. We need better audio playing algorithm to implement auto envlope at start and end of sample play.
  
-
-
-
