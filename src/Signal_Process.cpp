@@ -2,35 +2,29 @@
 #include "Signal_Process.h"
 
 
-Signal_Process::Signal_Process(int input_pin, int input_threshold, int velocity_threshold){
+Signal_Process::Signal_Process(uint8_t input_pin, uint8_t input_deadband, uint8_t velocity_levels){
     analog_input_pin = input_pin; //Input pin number      
-    Set_Input_Threshold(input_threshold, input_hysteresis);
-    Set_Velocity_Threshold(velocity_threshold, velocity_hysteresis);
+    Set_Input_Deadband(input_deadband);
+    Set_Velocity_Deadband(velocity_levels);
 }
 
-
-void Signal_Process::Set_Input_Threshold(int input_threshold, int hysteresis){
-    input_pos_thres = input_threshold;  //Rising Edge Threshold 
-    input_neg_thres = input_threshold - hysteresis;  //Falling Edge Threshold 
+void Signal_Process::Set_Input_Deadband(uint8_t deadband){
+    input_deadband_thres = deadband;    //Value greater than this value from ADC output will be counted as valid signal
 }
 
-void Signal_Process::Set_Velocity_Threshold(int velocity_threshold, int hysteresis){
-    vel_pos_thres = velocity_threshold; //Rising Edge Threshold 
-    vel_neg_thres = velocity_threshold + hysteresis;  //Falling Edge Threshold  
+void Signal_Process::Set_Velocity_Deadband(uint8_t velocity_deadband){
+    velocity_thres = velocity_deadband;   //Will be used for the peak detection method
 }
 
 int Signal_Process::Peak_Detector(){
 
-    int thres = 15;
-
     raw = analogRead(analog_input_pin);
 
-    if(raw > 20){   //Signal detected extract peak value
-        if ((raw > filtered_val + thres) or (raw  < filtered_val - thres)){   //filter the signal with step of 10;
+    if(raw > input_deadband_thres){   //Signal detected extract peak value
+        if ((raw > filtered_val + velocity_thres) or (raw  < filtered_val - velocity_thres)){   //filter the signal with step of 10;
             filtered_val = raw;
             if((prev_slope > 0) && ((filtered_val - prev_filtered_val) < 0)){   //Slope change from positive to negative, meaning local peak has been reached
-                max_velocity = filtered_val + thres;
-                //Serial.println("Peak: " + String(max_velocity));
+                max_velocity = filtered_val + velocity_thres;
             }
             else{
                 max_velocity = 0;
@@ -42,16 +36,13 @@ int Signal_Process::Peak_Detector(){
             max_velocity = 0;
         }
     }
-    else if(raw < 10){  // Signal below threshold, ignore as noise
+    else if(raw < input_deadband_thres - input_hystersis){  // Signal below threshold, ignore as noise
         max_velocity = 0;
-        detection_state = 0;
         filtered_val = 0;
         prev_filtered_val = 0;
         prev_slope = 0;
-        processing = false;  
     }
     return max_velocity;
 }
 
-// Dynamic detection fully implemented, need to test with audio samples. 
-
+// Functions parameterised, need to test since not tested codes 

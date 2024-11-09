@@ -17,40 +17,29 @@
 class Signal_Process{
   public:
     //Process_Signal Constructor setups the input pinout, input threshold and velocity steps threshold  
-    Signal_Process(int input_pin, int input_threshold, int velocity_threshold);
+    Signal_Process(uint8_t input_pin, uint8_t input_deadband, uint8_t velocity_levels);
 
     int Peak_Detector();  //Return the peak value of the input signal
 
-    //Threshold value setter
-    void Set_Input_Threshold(int input_threshold, int input_hysteresis);
-    void Set_Velocity_Threshold(int velocity_threshold, int velocity_hysteresis);
+    //Filtering Setter
+    void Set_Input_Deadband(uint8_t input_deadband);
+    void Set_Input_Maximum(uint8_t input_maximum);
+    void Set_Velocity_Deadband(uint8_t velocity_deadband);
+    
 
+  private:    
+    // raw ADC signal variables
+    int analog_input_pin; // ADC Input pin number
+    int raw = 0;          // Raw ADC value
+    int input_deadband_thres; // Enage input threshold 
+    int input_hystersis = 5;  // Release hystersis
 
-  private:
-    //Signal Processing Contants
-    int analog_input_pin;          //Input pin number
-    int input_hysteresis = 5;             //Difference between positive threshold and negtiave threshold
-    int velocity_hysteresis = 5;             //Difference between positive threshold and negtiave threshold
-    int input_pos_thres;  //Rising Edge Threshold 
-    int input_neg_thres;  //Falling Edge Threshold 
-    int vel_pos_thres; //Rising Edge Threshold 
-    int vel_neg_thres;  //Falling Edge Threshold
-
-
-    int raw = 0;
-    int prev_filtered_val = 0;
-    int prev_slope = 0; // Previous slope value.  
-    int prev_max_velocity = 0;
+    // Peak Detection variables
+    int velocity_thres;   // Deadband value for filter
+    int filtered_val = 0; // Filtered value using deadband filter 
+    int prev_filtered_val = 0;  // previous filtered value to extract current slope
+    int prev_slope = 0;   // Previous slope value.  
     int max_velocity = 0; //Final output variable of the signal processing
-    int output = 0;
-    int filtered_val = 0;
-
-
-
-    //Signal Processing Conditional Variables
-    uint8_t detection_state = 0; // 0: stand by expecting peak, 1: peak detected
-    bool processing = false;
 };
-
 
 #endif

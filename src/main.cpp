@@ -46,7 +46,7 @@ AudioControlSGTL5000 audioShield;
 #pragma endregion
 
 Debug_Only scope(9600);
-Signal_Process PAD0(A0, 20,15); 
+Signal_Process PAD0(A0,15, 100); 
 
 
 int analog_input_pin;          //Input pin number
