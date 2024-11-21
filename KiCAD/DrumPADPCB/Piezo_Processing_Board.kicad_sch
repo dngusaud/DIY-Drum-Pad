@@ -2994,7 +2994,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Horizontal"
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
 			(at 62.23 99.06 0)
 			(effects
 				(font
@@ -3590,7 +3590,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "49790b1f-94b2-4760-8beb-6b770f345432")
-		(property "Reference" "TP1"
+		(property "Reference" "RAW1"
 			(at 69.85 90.17 0)
 			(effects
 				(font
@@ -3641,7 +3641,7 @@
 		(instances
 			(project "DrumPADPCB"
 				(path "/fa7dc156-0738-4812-9e62-07e618374ad9/4277ded8-b5b3-4b4d-a9ae-16de9562f325"
-					(reference "TP1")
+					(reference "RAW1")
 					(unit 1)
 				)
 			)
@@ -4397,10 +4397,10 @@
 			)
 		)
 		(pin "2"
-			(uuid "b7b255cf-167d-407e-ab72-981e6db951e4")
+			(uuid "b7b255cf-167d-407e-ab72-981e6db951e5")
 		)
 		(pin "1"
-			(uuid "76d8b6a1-edf1-4a43-a4e0-0c45a602195e")
+			(uuid "76d8b6a1-edf1-4a43-a4e0-0c45a602195f")
 		)
 		(instances
 			(project ""
@@ -4420,7 +4420,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a6bca44e-7d36-41b7-a246-bc1103baca60")
-		(property "Reference" "TP5"
+		(property "Reference" "Buffered-Scaled1"
 			(at 207.01 106.68 0)
 			(effects
 				(font
@@ -4471,7 +4471,7 @@
 		(instances
 			(project "DrumPADPCB"
 				(path "/fa7dc156-0738-4812-9e62-07e618374ad9/4277ded8-b5b3-4b4d-a9ae-16de9562f325"
-					(reference "TP5")
+					(reference "Buffered-Scaled1")
 					(unit 1)
 				)
 			)
@@ -4551,7 +4551,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "baf095c5-f663-4a23-ac93-3dfdbeb82744")
-		(property "Reference" "TP2"
+		(property "Reference" "Filtered1"
 			(at 118.11 90.17 0)
 			(effects
 				(font
@@ -4602,7 +4602,7 @@
 		(instances
 			(project "DrumPADPCB"
 				(path "/fa7dc156-0738-4812-9e62-07e618374ad9/4277ded8-b5b3-4b4d-a9ae-16de9562f325"
-					(reference "TP2")
+					(reference "Filtered1")
 					(unit 1)
 				)
 			)
@@ -5230,7 +5230,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e4925744-1e3a-4c9e-853b-49a88ef9851a")
-		(property "Reference" "TP3"
+		(property "Reference" "Buffered1"
 			(at 161.29 92.71 0)
 			(effects
 				(font
@@ -5281,7 +5281,7 @@
 		(instances
 			(project "DrumPADPCB"
 				(path "/fa7dc156-0738-4812-9e62-07e618374ad9/4277ded8-b5b3-4b4d-a9ae-16de9562f325"
-					(reference "TP3")
+					(reference "Buffered1")
 					(unit 1)
 				)
 			)
@@ -5296,7 +5296,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "ed8c24a6-15df-40a9-9057-278cbfeecdce")
-		(property "Reference" "TP4"
+		(property "Reference" "Scaled1"
 			(at 173.99 104.14 0)
 			(effects
 				(font
@@ -5347,7 +5347,7 @@
 		(instances
 			(project "DrumPADPCB"
 				(path "/fa7dc156-0738-4812-9e62-07e618374ad9/4277ded8-b5b3-4b4d-a9ae-16de9562f325"
-					(reference "TP4")
+					(reference "Scaled1")
 					(unit 1)
 				)
 			)
