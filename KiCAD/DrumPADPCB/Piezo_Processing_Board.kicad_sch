@@ -2042,6 +2042,16 @@
 	)
 	(wire
 		(pts
+			(xy 62.23 129.54) (xy 62.23 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "34a61b8a-395d-4282-ae6d-750d513200a6")
+	)
+	(wire
+		(pts
 			(xy 153.67 119.38) (xy 153.67 101.6)
 		)
 		(stroke
@@ -2049,6 +2059,16 @@
 			(type default)
 		)
 		(uuid "36955f2e-0fba-4014-b5dc-061509bf339e")
+	)
+	(wire
+		(pts
+			(xy 62.23 132.08) (xy 69.85 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3885c72a-c8da-4f6f-859e-5754266a351a")
 	)
 	(wire
 		(pts
@@ -2602,6 +2622,16 @@
 	)
 	(wire
 		(pts
+			(xy 254 129.54) (xy 254 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f87c70e7-61e0-465f-87a3-7d75e86e4b81")
+	)
+	(wire
+		(pts
 			(xy 231.14 118.11) (xy 234.95 118.11)
 		)
 		(stroke
@@ -2903,6 +2933,72 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 254 129.54 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "1b3b1a86-ae6e-4286-bc7e-6dc13196d9b0")
+		(property "Reference" "GND2"
+			(at 250.19 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "TestPoint"
+			(at 250.19 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_Pin:Pin_D1.4mm_L8.5mm_W2.8mm_FlatFork"
+			(at 259.08 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 259.08 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 254 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "700c2d50-f4f8-4e23-9dcb-35c6d780fe90")
+		)
+		(instances
+			(project "DrumPADPCB"
+				(path "/fa7dc156-0738-4812-9e62-07e618374ad9/4277ded8-b5b3-4b4d-a9ae-16de9562f325"
+					(reference "GND2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:VCC")
 		(at 185.42 96.52 0)
 		(unit 1)
@@ -3125,7 +3221,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "BZT52C3V0S"
+		(property "Value" "BZT52C3V9S"
 			(at 215.9 125.73 90)
 			(effects
 				(font
@@ -3780,6 +3876,72 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 62.23 129.54 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5c5be3aa-f394-4c74-bb96-69e413c12a25")
+		(property "Reference" "GND1"
+			(at 58.42 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "TestPoint"
+			(at 58.42 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_Pin:Pin_D1.4mm_L8.5mm_W2.8mm_FlatFork"
+			(at 67.31 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 67.31 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 62.23 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f1af561a-b63d-492d-a3ac-a88c383214ef")
+		)
+		(instances
+			(project "DrumPADPCB"
+				(path "/fa7dc156-0738-4812-9e62-07e618374ad9/4277ded8-b5b3-4b4d-a9ae-16de9562f325"
+					(reference "GND1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:VCC")
 		(at 231.14 101.6 0)
 		(unit 1)
@@ -4139,7 +4301,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "PDZ22B 22V"
+		(property "Value" "BZT52C22SQ"
 			(at 97.79 115.57 90)
 			(effects
 				(font
@@ -4271,6 +4433,71 @@
 			(project "DrumPADPCB"
 				(path "/fa7dc156-0738-4812-9e62-07e618374ad9/4277ded8-b5b3-4b4d-a9ae-16de9562f325"
 					(reference "D1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 254 132.08 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8acc9e43-9f7b-4271-885b-68eeb1093409")
+		(property "Reference" "#PWR021"
+			(at 254 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 254 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 254 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 254 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 254 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "06019b19-4a4a-4936-9c39-439cea2f9870")
+		)
+		(instances
+			(project "DrumPADPCB"
+				(path "/fa7dc156-0738-4812-9e62-07e618374ad9/4277ded8-b5b3-4b4d-a9ae-16de9562f325"
+					(reference "#PWR021")
 					(unit 1)
 				)
 			)
