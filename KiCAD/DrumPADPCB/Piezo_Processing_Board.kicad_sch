@@ -3151,7 +3151,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "330K"
+		(property "Value" "390K"
 			(at 127 115.57 0)
 			(effects
 				(font
@@ -3561,7 +3561,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "LED"
+		(property "Value" "GREEN"
 			(at 209.55 53.6575 90)
 			(effects
 				(font
@@ -4370,7 +4370,7 @@
 				)
 			)
 		)
-		(property "Value" "CUS10S30"
+		(property "Value" "SD103AWS"
 			(at 88.9 95.25 0)
 			(effects
 				(font
@@ -4587,7 +4587,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "LED"
+		(property "Value" "GREEN"
 			(at 256.54 53.6575 90)
 			(effects
 				(font
